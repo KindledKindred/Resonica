@@ -12,7 +12,9 @@
           var a = new Error("Cannot find module '" + i + "'");
           throw a.code = 'MODULE_NOT_FOUND', a;
         }
-        var p = n[i] = { exports: {} };
+        var p = n[i] = {
+          exports: {}
+        };
         e[i][0].call(p.exports, function (r) {
           var n = e[i][1][r];
           return o(n || r);
@@ -111,7 +113,7 @@
       sectionHeight: 1,
       numberOffset: 5,
       shadowBlur: true,
-      bgColor: '#181818'
+      bgColor: '#202020' // タイトル背景文字 
     };
 
     var ui = {
@@ -313,7 +315,7 @@
           state.text = {
             baseLine: 'top',
             font: '800 170px Montserrat',
-            value: 'CYBNICA'
+            value: 'RESONICA'
           };
         }
       }, {
@@ -434,7 +436,7 @@
 
           tools.drawPath(ctx, function () {
             if (cfg.shadowBlur) {
-              ctx.shadowColor = 'rgba(255,255,255,0.025)';
+              ctx.shadowColor = 'rgba(55,55,155,0.025)';
               ctx.shadowBlur = 30 * state.mousePower;
             }
             ctx.globalAlpha = state.fadeInProgress * 0.95;
@@ -546,6 +548,7 @@
         key: 'startGeneratingNumbers',
         value: function startGeneratingNumbers() {
           var state = this.state;
+
           function generateItem() {
             var cells = plane.cells,
                 xCell = plane.xCell,
@@ -607,6 +610,7 @@
         key: 'startGeneratingLines',
         value: function startGeneratingLines() {
           var state = this.state;
+
           function generateItem() {
             var cells = plane.cells,
                 xCell = plane.xCell,
@@ -664,6 +668,7 @@
         key: 'startGeneratingGlitches',
         value: function startGeneratingGlitches() {
           var state = this.state;
+
           function generateItem() {
             var cells = plane.cells,
                 xCell = plane.xCell,
@@ -967,7 +972,9 @@
           var cp = state.planeProgress;
           var dp = state.dotsProgress;
 
-          this.drawPlaneCenterLines({ p: p });
+          this.drawPlaneCenterLines({
+            p: p
+          });
 
           for (var i = 0; i < cells[0]; i++) {
             for (var i2 = 0; i2 < cells[1]; i2++) {
@@ -992,7 +999,13 @@
                   x: _x2,
                   y: _y2
                 });
-                this.drawYMarkup({ i: i, p: p, cp: cp, x: _x2, y: _y2 });
+                this.drawYMarkup({
+                  i: i,
+                  p: p,
+                  cp: cp,
+                  x: _x2,
+                  y: _y2
+                });
               }
               if (i2 !== xCenter && i === yCenter) {
                 this.drawXLines({

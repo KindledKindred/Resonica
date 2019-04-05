@@ -18,7 +18,7 @@
   },
   "scripts": {
     "test": "mocha --compilers js:babel-register test/**/*.test.js",
-    "start": "npm run watch",
+    "dev": "npm run watch",
     "esdoc": "esdoc -c esdoc.json",
     "build:html": "pug  ./src/assets --hierarchy -o ./src/assets",
     "build:css": "stylus -c --include-css ./src/stylus/App.styl -o ./src/assets/style.css -m --sourcemap-base ../stylus",

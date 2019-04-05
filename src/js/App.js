@@ -1,4 +1,4 @@
-(function() {
+(function () {
   function r(e, n, t) {
     function o(i, f) {
       if (!n[i]) {
@@ -9,10 +9,12 @@
           var a = new Error("Cannot find module '" + i + "'");
           throw ((a.code = 'MODULE_NOT_FOUND'), a);
         }
-        var p = (n[i] = { exports: {} });
+        var p = (n[i] = {
+          exports: {}
+        });
         e[i][0].call(
           p.exports,
-          function(r) {
+          function (r) {
             var n = e[i][1][r];
             return o(n || r);
           },
@@ -27,21 +29,18 @@
       return n[i].exports;
     }
     for (
-      var u = 'function' == typeof require && require, i = 0;
-      i < t.length;
-      i++
+      var u = 'function' == typeof require && require, i = 0; i < t.length; i++
     )
       o(t[i]);
     return o;
   }
   return r;
-})()(
-  {
+})()({
     1: [
-      function(require, module, exports) {
+      function (require, module, exports) {
         'use strict';
 
-        var _createClass = (function() {
+        var _createClass = (function () {
           function defineProperties(target, props) {
             for (var i = 0; i < props.length; i++) {
               var descriptor = props[i];
@@ -51,7 +50,7 @@
               Object.defineProperty(target, descriptor.key, descriptor);
             }
           }
-          return function(Constructor, protoProps, staticProps) {
+          return function (Constructor, protoProps, staticProps) {
             if (protoProps) defineProperties(Constructor.prototype, protoProps);
             if (staticProps) defineProperties(Constructor, staticProps);
             return Constructor;
@@ -125,7 +124,7 @@
           sectionHeight: 1,
           numberOffset: 5,
           shadowBlur: true,
-          bgColor: '#181818'
+          bgColor: '#202020' // タイトル背景文字 
         };
 
         var ui = {
@@ -136,7 +135,7 @@
           mouse: '#mouse'
         };
 
-        var App = (function() {
+        var App = (function () {
           function App() {
             _classCallCheck(this, App);
 
@@ -170,8 +169,7 @@
             this.start();
           }
 
-          _createClass(App, [
-            {
+          _createClass(App, [{
               key: 'start',
               value: function start() {
                 this.initEvents();
@@ -184,9 +182,9 @@
             {
               key: 'splitText',
               value: function splitText() {
-                ui.textNodes.forEach(function(el) {
+                ui.textNodes.forEach(function (el) {
                   var value = el.innerText;
-                  el.innerHTML = value.split('').reduce(function(acc, cur) {
+                  el.innerHTML = value.split('').reduce(function (acc, cur) {
                     return acc + ('<span class="letter">' + cur + '</span>');
                   }, '');
                 });
@@ -199,7 +197,7 @@
                   ui.social.classList.add('active');
                   ui.mouse.classList.add('active');
                 };
-                ui.textNodes.forEach(function(el, elIndex) {
+                ui.textNodes.forEach(function (el, elIndex) {
                   el.classList.add('active');
                   var letters = el.querySelectorAll('.letter');
                   var length = Math.round(letters.length / 2) + 1;
@@ -209,7 +207,7 @@
                       letter1 = _ref[0],
                       letter2 = _ref[1];
 
-                    setTimeout(function() {
+                    setTimeout(function () {
                       if (letter1) letter1.classList.add('active');
                       if (letter2) letter2.classList.add('active');
                       if (
@@ -299,11 +297,11 @@
               value: function initEvents() {
                 var _this = this;
 
-                window.addEventListener('resize', function(e) {
+                window.addEventListener('resize', function (e) {
                   _this.getDimensions();
                   _this.resizeHandler(e);
                 });
-                document.addEventListener('mousemove', function(e) {
+                document.addEventListener('mousemove', function (e) {
                   mouse.x = e.clientX;
                   mouse.y = e.clientY;
                   mouse.coords = {
@@ -311,17 +309,17 @@
                     y: ((mouse.y / doc.height - 0.5) / 0.5) * -1
                   };
                 });
-                document.addEventListener('mousedown', function(e) {
+                document.addEventListener('mousedown', function (e) {
                   mouse.down = {
                     state: true,
                     x: e.clientX,
                     y: e.clientY
                   };
                 });
-                document.addEventListener('mouseup', function(e) {
+                document.addEventListener('mouseup', function (e) {
                   mouse.down.state = false;
                 });
-                document.addEventListener('contextmenu', function(e) {
+                document.addEventListener('contextmenu', function (e) {
                   e.preventDefault();
                 });
                 this.resizeHandler();
@@ -349,7 +347,7 @@
                 state.text = {
                   baseLine: 'top',
                   font: '800 170px Montserrat',
-                  value: 'CYBNICA'
+                  value: 'RESONICA'
                 };
               }
             },
@@ -357,7 +355,7 @@
               key: 'initCheckingInterval',
               value: function initCheckingInterval() {
                 var state = this.state;
-                setInterval(function() {
+                setInterval(function () {
                   state.tabIsActive = state.time <= state.lt ? false : true;
                   state.lt = state.time;
                   state.needRedraw = !state.tabIsActive;
@@ -435,7 +433,7 @@
                 var xCell = plane.xCell,
                   yCell = plane.yCell;
 
-                tools.drawPath(ctx, function() {
+                tools.drawPath(ctx, function () {
                   ctx.fillStyle = 'white';
                   ctx.textBaseline = state.text.baseLine;
                   ctx.font = state.text.font;
@@ -475,9 +473,9 @@
                 var mp = tools.cellEasing(state.mousePower, 0, 1, 1);
                 var length = state.textPixelData.length;
 
-                tools.drawPath(ctx, function() {
+                tools.drawPath(ctx, function () {
                   if (cfg.shadowBlur) {
-                    ctx.shadowColor = 'rgba(255,255,255,0.025)';
+                    ctx.shadowColor = 'rgba(55,55,155,0.025)';
                     ctx.shadowBlur = 30 * state.mousePower;
                   }
                   ctx.globalAlpha = state.fadeInProgress * 0.95;
@@ -499,7 +497,7 @@
                   var x2 = (3 + mp * 50) * Math.sin(p * i);
                   var y2 = (10 + mp * 50) * Math.cos(p * i);
                   var per = (1 - mp) * (i / length);
-                  tools.drawPath(ctx, function() {
+                  tools.drawPath(ctx, function () {
                     if (!per) return;
                     ctx.globalAlpha = state.fadeInProgress;
                     ctx.font = '8px Montserrat';
@@ -595,6 +593,7 @@
               key: 'startGeneratingNumbers',
               value: function startGeneratingNumbers() {
                 var state = this.state;
+
                 function generateItem() {
                   var cells = plane.cells,
                     xCell = plane.xCell,
@@ -609,7 +608,7 @@
                     color: 'rgba(255,255,255,' + tools.random(0.01, 0.3) + ')',
                     blinks: Array(tools.random(0, 3, true))
                       .fill(null)
-                      .map(function(item) {
+                      .map(function (item) {
                         return {
                           at: tools.random(0, 1),
                           dur: tools.random(0, 0.3)
@@ -634,15 +633,15 @@
                 var yCell = plane.yCell,
                   xCell = plane.xCell;
 
-                state.animNumbers.forEach(function(item, i) {
+                state.animNumbers.forEach(function (item, i) {
                   item.p += item.pf * state.delta;
                   var show = true;
-                  item.blinks.forEach(function(blink) {
+                  item.blinks.forEach(function (blink) {
                     if (item.p >= blink.at && item.p <= blink.at + blink.dur)
                       show = false;
                   });
                   if (!show) return;
-                  tools.drawPath(ctx, function() {
+                  tools.drawPath(ctx, function () {
                     if (cfg.shadowBlur) {
                       ctx.shadowColor = 'white';
                       ctx.shadowBlur = 10;
@@ -667,6 +666,7 @@
               key: 'startGeneratingLines',
               value: function startGeneratingLines() {
                 var state = this.state;
+
                 function generateItem() {
                   var cells = plane.cells,
                     xCell = plane.xCell,
@@ -698,7 +698,7 @@
               value: function drawAnimLines() {
                 var ctx = context.main;
                 var state = this.state;
-                state.animLines.forEach(function(line, i) {
+                state.animLines.forEach(function (line, i) {
                   line.p += line.pf * state.delta;
                   var p = tools.easing(line.p, 0, 1, 1);
 
@@ -715,31 +715,31 @@
                   var isX = line.coord === 'x';
                   var isY = line.coord === 'y';
 
-                  var x = !isX
-                    ? 0
-                    : backwards
-                    ? -(length - line.distance * p)
-                    : -line.distance * p;
-                  var y = !isY
-                    ? 0
-                    : backwards
-                    ? -(length - line.distance * p)
-                    : -line.distance * p;
+                  var x = !isX ?
+                    0 :
+                    backwards ?
+                    -(length - line.distance * p) :
+                    -line.distance * p;
+                  var y = !isY ?
+                    0 :
+                    backwards ?
+                    -(length - line.distance * p) :
+                    -line.distance * p;
 
-                  tools.drawPath(ctx, function() {
+                  tools.drawPath(ctx, function () {
                     ctx.globalAlpha = state.fadeInProgress;
                     ctx.fillStyle = color;
                     ctx.fillRect(
                       line.x +
-                        x +
-                        (isX && p <= 0.5
-                          ? (line.length - length) * line.dir
-                          : 0),
+                      x +
+                      (isX && p <= 0.5 ?
+                        (line.length - length) * line.dir :
+                        0),
                       line.y +
-                        y +
-                        (isY && p <= 0.5
-                          ? (line.length - length) * line.dir
-                          : 0),
+                      y +
+                      (isY && p <= 0.5 ?
+                        (line.length - length) * line.dir :
+                        0),
                       isX ? length : 1,
                       isY ? length : 1
                     );
@@ -752,6 +752,7 @@
               key: 'startGeneratingGlitches',
               value: function startGeneratingGlitches() {
                 var state = this.state;
+
                 function generateItem() {
                   var cells = plane.cells,
                     xCell = plane.xCell,
@@ -767,7 +768,7 @@
                     color: 'rgba(255,255,255,' + tools.random(0.01, 1) + ')',
                     blinks: Array(tools.random(0, 3, true))
                       .fill(null)
-                      .map(function(blink) {
+                      .map(function (blink) {
                         return {
                           at: tools.random(0, 1),
                           dur: tools.random(0, 0.3)
@@ -790,10 +791,10 @@
               value: function drawGlitches() {
                 var ctx = context.main;
                 var state = this.state;
-                state.glitches.forEach(function(glitch, i) {
+                state.glitches.forEach(function (glitch, i) {
                   glitch.p += glitch.pf * state.delta;
                   var show = true;
-                  glitch.blinks.forEach(function(blink) {
+                  glitch.blinks.forEach(function (blink) {
                     if (
                       glitch.p >= blink.at &&
                       glitch.p <= blink.at + blink.dur
@@ -801,7 +802,7 @@
                       show = false;
                   });
                   if (!show) return;
-                  tools.drawPath(ctx, function() {
+                  tools.drawPath(ctx, function () {
                     if (cfg.shadowBlur) {
                       ctx.shadowColor = 'white';
                       ctx.shadowBlur = 30;
@@ -869,35 +870,35 @@
                   var color = 'rgba(255,255,255,' + 0.3 * percent + ')';
                   var color2 = 'rgba(255,255,255,' + 0.7 * p2 * percent + ')';
 
-                  tools.drawPath(ctx, function() {
+                  tools.drawPath(ctx, function () {
                     ctx.strokeStyle = color2;
                     ctx.moveTo(sx, sy);
                     ctx.lineTo(mouse.x, mouse.y);
                     ctx.stroke();
                   });
-                  tools.drawPath(ctx, function() {
+                  tools.drawPath(ctx, function () {
                     ctx.strokeStyle = color2;
                     ctx.moveTo(x, y);
                     ctx.lineTo(sx, sy);
                     ctx.stroke();
                   });
-                  tools.drawPath(ctx, function() {
+                  tools.drawPath(ctx, function () {
                     ctx.fillStyle = color;
                     ctx.arc(x, y, 1, 0, 2 * Math.PI);
                     ctx.fill();
                   });
-                  tools.drawPath(ctx, function() {
+                  tools.drawPath(ctx, function () {
                     ctx.strokeStyle = 'rgba(255,255,255,' + 0.5 * percent + ')';
                     ctx.lineWidth = 1 + 2 * (1 - percent);
                     ctx.arc(x, y, 3 + 10 * (1 - percent), 0, 2 * Math.PI);
                     ctx.stroke();
                   });
-                  tools.drawPath(ctx, function() {
+                  tools.drawPath(ctx, function () {
                     ctx.fillStyle = 'rgba(255,255,255,' + percent + ')';
                     ctx.arc(sx, sy, 1, 0, 2 * Math.PI);
                     ctx.fill();
                   });
-                  tools.drawPath(ctx, function() {
+                  tools.drawPath(ctx, function () {
                     if (cfg.shadowBlur) {
                       ctx.shadowColor = 'white';
                       ctx.shadowBlur = radius;
@@ -933,7 +934,7 @@
                 var mf = f >= 0.5 ? (1 - f) / 0.5 : f / 0.5;
                 var size = 3;
                 if (!mf) return;
-                tools.drawPath(ctx, function() {
+                tools.drawPath(ctx, function () {
                   ctx.fillStyle = 'rgba(255,255,255,' + mf * 0.15 + ')';
                   ctx.fillRect(x - 1, y - 1, size, size);
                 });
@@ -947,7 +948,7 @@
                 var ctx = context.plane;
                 var centerCoords = plane.centerCoords;
 
-                tools.drawPath(ctx, function() {
+                tools.drawPath(ctx, function () {
                   ctx.fillStyle =
                     'rgba(255,255,255,' + (0.2 + (1 - p) * 1) + ')';
                   ctx.fillRect(
@@ -983,7 +984,7 @@
                 if (f >= 1) f = 1;
                 var ef = tools.cellEasing(f, 0, 1, 1);
                 if (i) {
-                  tools.drawPath(ctx, function() {
+                  tools.drawPath(ctx, function () {
                     ctx.fillStyle =
                       'rgba(255,255,255,' + (0.05 + (1 - p) * 0.35) + ')';
                     ctx.fillRect(
@@ -1015,11 +1016,11 @@
                 var f = cp * (cp / point);
                 if (f >= 1) f = 1;
                 var f2 =
-                  conds[0] && conds[1]
-                    ? (p - point) / percent
-                    : conds[0]
-                    ? 1
-                    : 0;
+                  conds[0] && conds[1] ?
+                  (p - point) / percent :
+                  conds[0] ?
+                  1 :
+                  0;
 
                 var text = i - yCenter + '';
                 ctx.fillStyle =
@@ -1028,7 +1029,7 @@
                   x - ctx.measureText(text).width / 2,
                   y + cfg.sectionWidth / 2 + cfg.numberOffset
                 ];
-                tools.drawPath(ctx, function() {
+                tools.drawPath(ctx, function () {
                   var o = (1 - f2) * 50;
                   ctx.globalAlpha = f2;
                   ctx.fillRect(
@@ -1038,7 +1039,7 @@
                     cfg.sectionWidth
                   );
                 });
-                tools.drawPath(ctx, function() {
+                tools.drawPath(ctx, function () {
                   ctx.globalAlpha = f2;
                   ctx.textBaseline = 'top';
                   ctx.fillText(
@@ -1066,7 +1067,7 @@
                 if (f >= 1) f = 1;
                 var ef = tools.cellEasing(f, 0, 1, 1);
                 if (i2) {
-                  tools.drawPath(ctx, function() {
+                  tools.drawPath(ctx, function () {
                     ctx.fillStyle =
                       'rgba(255,255,255,' + (0.05 + (1 - p) * 0.35) + ')';
                     ctx.fillRect(
@@ -1098,15 +1099,15 @@
                 var f = cp * (cp / point);
                 if (f >= 1) f = 1;
                 var f2 =
-                  conds[0] && conds[1]
-                    ? (p - point) / percent
-                    : conds[0]
-                    ? 1
-                    : 0;
+                  conds[0] && conds[1] ?
+                  (p - point) / percent :
+                  conds[0] ?
+                  1 :
+                  0;
 
                 ctx.fillStyle =
                   'rgba(255,255,255,' + (0.1 + (1 - f) * 0.75) + ')';
-                tools.drawPath(ctx, function() {
+                tools.drawPath(ctx, function () {
                   var o = (1 - f2) * 50;
                   ctx.globalAlpha = f2;
                   ctx.fillRect(
@@ -1116,7 +1117,7 @@
                     cfg.sectionHeight
                   );
                 });
-                tools.drawPath(ctx, function() {
+                tools.drawPath(ctx, function () {
                   ctx.globalAlpha = f2;
                   ctx.textBaseline = 'middle';
                   var textCoords = [
@@ -1149,7 +1150,9 @@
                 var cp = state.planeProgress;
                 var dp = state.dotsProgress;
 
-                this.drawPlaneCenterLines({ p: p });
+                this.drawPlaneCenterLines({
+                  p: p
+                });
 
                 for (var i = 0; i < cells[0]; i++) {
                   for (var i2 = 0; i2 < cells[1]; i2++) {
@@ -1174,7 +1177,13 @@
                         x: _x2,
                         y: _y2
                       });
-                      this.drawYMarkup({ i: i, p: p, cp: cp, x: _x2, y: _y2 });
+                      this.drawYMarkup({
+                        i: i,
+                        p: p,
+                        cp: cp,
+                        x: _x2,
+                        y: _y2
+                      });
                     }
                     if (i2 !== xCenter && i === yCenter) {
                       this.drawXLines({
@@ -1216,9 +1225,9 @@
                 var point = percent * pos;
 
                 var f =
-                  sp >= point && sp <= point + percent
-                    ? (sp - point) / percent
-                    : 0;
+                  sp >= point && sp <= point + percent ?
+                  (sp - point) / percent :
+                  0;
                 if (!f) return;
 
                 var text = i - yCenter + '';
@@ -1229,7 +1238,7 @@
                   x - ctx.measureText(text).width / 2,
                   y + cfg.sectionWidth / 2 + cfg.numberOffset
                 ];
-                tools.drawPath(ctx, function() {
+                tools.drawPath(ctx, function () {
                   ctx.fillStyle = 'rgba(255,255,255,' + f * 0.5 + ')';
                   ctx.fillRect(
                     x,
@@ -1238,7 +1247,7 @@
                     cfg.sectionWidth
                   );
                 });
-                tools.drawPath(ctx, function() {
+                tools.drawPath(ctx, function () {
                   if (cfg.shadowBlur) {
                     ctx.shadowBlur = 5;
                     ctx.shadowColor = 'white';
@@ -1268,12 +1277,12 @@
                 var point = percent * pos;
 
                 var f =
-                  sp >= point && sp <= point + percent
-                    ? (sp - point) / percent
-                    : 0;
+                  sp >= point && sp <= point + percent ?
+                  (sp - point) / percent :
+                  0;
                 if (!f) return;
 
-                tools.drawPath(ctx, function() {
+                tools.drawPath(ctx, function () {
                   ctx.fillStyle = 'rgba(255,255,255,' + f * 0.5 + ')';
                   ctx.fillRect(
                     x - cfg.sectionWidth / 2,
@@ -1283,7 +1292,7 @@
                   );
                 });
 
-                tools.drawPath(ctx, function() {
+                tools.drawPath(ctx, function () {
                   if (cfg.shadowBlur) {
                     ctx.shadowBlur = 5;
                     ctx.shadowColor = 'white';
@@ -1303,14 +1312,13 @@
           return App;
         })();
 
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
           window.app = new App();
         });
       },
       {}
     ]
-  },
-  {},
+  }, {},
   [1]
 );
 //# sourceMappingURL=app.js.map
