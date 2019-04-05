@@ -1,0 +1,64 @@
+{
+  "babel": {
+    "presets": [
+      "latest"
+    ],
+    "env": {
+      "development": {
+        "presets": [
+          "power-assert"
+        ]
+      }
+    }
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "scripts": {
+    "test": "mocha --compilers js:babel-register test/**/*.test.js",
+    "start": "npm run watch",
+    "esdoc": "esdoc -c esdoc.json",
+    "build:html": "pug  ./src/assets --hierarchy -o ./src/assets",
+    "build:css": "stylus -c --include-css ./src/stylus/App.styl -o ./src/assets/style.css -m --sourcemap-base ../stylus",
+    "build:js": "browserify ./src/js/App.js -d | exorcist ./src/assets/app.js.map > ./src/assets/app.js",
+    "build": "npm-run-all -p build:html build:css build:js",
+    "watch:html": "pug  ./src/assets --hierarchy -o ./src/assets -w",
+    "watch:css": "stylus -c -w --include-css ./src/stylus/App.styl -o ./src/assets/style.css -m --sourcemap-base ../stylus",
+    "watch:js": "watchify ./src/js/App.js -v -o \"exorcist ./src/assets/app.js.map > ./src/assets/app.js\" -d",
+    "watch:server": "browser-sync start --server ./ --startPath src/assets/ reload --files=\"src/**/*\"",
+    "watch": "npm-run-all -p watch:html watch:css watch:js watch:server",
+    "release:html": "pug  ./src/assets --hierarchy -o ./dist",
+    "release:css": "stylus -c --include-css ./src/stylus/App.styl -o ./dist/style.css",
+    "release:js": "cross-env NODE_ENV=production browserify ./src/js/App.js | uglifyjs -c warnings=false -m > ./dist/app.js",
+    "release:clean": "rimraf ./dist",
+    "release:copy": "cpx \"./src/assets/**/!(*.js|*.css|*.map)\" ./dist",
+    "release": "npm-run-all -s release:clean release:copy -p release:html release:css release:js"
+  },
+  "dependencies": {
+    "normalize.css": "^5.0.0"
+  },
+  "devDependencies": {
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-power-assert": "^1.0.0",
+    "babel-register": "^6.16.3",
+    "babelify": "^7.3.0",
+    "bootstrap-4-stylus": "^1.0.6",
+    "bootstrap-material-design": "^4.1.1",
+    "browser-sync": "^2.17.0",
+    "browserify": "^13.1.0",
+    "cpx": "^1.5.0",
+    "cross-env": "^3.1.1",
+    "esdoc": "^0.4.8",
+    "exorcist": "^0.4.0",
+    "mocha": "^3.1.0",
+    "npm-run-all": "^3.1.0",
+    "power-assert": "^1.4.1",
+    "pug-cli": "^1.0.0-alpha6",
+    "rimraf": "^2.5.4",
+    "stylus": "^0.54.5",
+    "uglify-js": "^2.7.3",
+    "watchify": "^3.7.0"
+  }
+}
