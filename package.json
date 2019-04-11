@@ -53,7 +53,7 @@
     "esdoc": "^0.4.8",
     "exorcist": "^0.4.0",
     "mocha": "^3.1.0",
-    "npm-run-all": "^3.1.0",
+    "npm-run-all": "^3.1.2",
     "power-assert": "^1.4.1",
     "pug-cli": "^1.0.0-alpha6",
     "rimraf": "^2.5.4",
